@@ -6,7 +6,6 @@ class TestGoogleSearch():
         cls.driver = webdriver.Chrome()
         cls.driver.implicitly_wait(10)
   
-  def test_google_search(self):
 # Navigate to the website
 browser.get('https://example.com')
 
