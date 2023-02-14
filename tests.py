@@ -1,12 +1,25 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-user_name = "YOUR EMAILID"
-password = "YOUR PASSWORD"
-browser = webdriver.Chrome()
-driver.get("https://www.facebook.com")
-element = driver.find_element_by_id("email")
-element.send_keys(user_name)
-element = driver.find_element_by_id("pass")
-element.send_keys(password)
-element.send_keys(Keys.RETURN)
-element.close()
+
+class TestGoogleSearch():
+    @classmethod
+    def setup_class(cls):
+        # Create a new Chrome browser instance
+        cls.driver = webdriver.Chrome()
+        cls.driver.implicitly_wait(10)
+
+    @classmethod
+    def teardown_class(cls):
+        # Close the browser
+        cls.driver.quit()
+
+    def test_google_search(self):
+        # Navigate to the Google homepage
+        self.driver.get("https://www.google.com")
+
+        # Find the search input element and enter a search query
+        search_box = self.driver.find_element_by_name("q")
+        search_box.send_keys("python selenium")
+        search_box.submit()
+
+        # Assert that the search results page was loaded successfully
+        assert "Python Selenium - Google Search" in self.driver.title
