@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 user_name = "YOUR EMAILID"
 password = "YOUR PASSWORD"
-driver = webdriver.Firefox()
+browser = webdriver.Chrome()
 driver.get("https://www.facebook.com")
 element = driver.find_element_by_id("email")
 element.send_keys(user_name)
