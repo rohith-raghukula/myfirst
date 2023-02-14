@@ -1,30 +1,30 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# Create a new Chrome browser instance
+# Initialize the Chrome browser
 browser = webdriver.Chrome()
-cls.driver.implicitly_wait(10)
 
+# Navigate to the website login page
+browser.get('https://profile.w3schools.com/')
 
-# Navigate to the website
-browser.get('https://example.com')
+# Find the email and password fields and enter the login credentials
+wait = WebDriverWait(browser, 10)
+email_field = wait.until(EC.presence_of_element_located((By.ID, 'modalusername')))
+email_field.send_keys('rohithr9701@gmail.com')
 
-# Find the form fields and fill them in
-name_field = browser.find_element_by_name('name')
-name_field.send_keys('John Doe')
-email_field = browser.find_element_by_name('email')
-email_field.send_keys('johndoe@example.com')
-message_field = browser.find_element_by_name('message')
-message_field.send_keys('This is a test message')
+password_field = wait.until(EC.presence_of_element_located((By.ID, 'current-password')))
+password_field.send_keys('Rohith@123')
 
-# Submit the form
-submit_button = browser.find_element_by_css_selector('button[type="submit"]')
-submit_button.click()
+# Submit the login form
+password_field.submit()
 
-# Wait for the response page to load
-browser.implicitly_wait(10)
+# Wait for the dashboard page to load
+wait.until(EC.url_contains('dashboard'))
 
-# Verify that the response page contains a success message
-assert 'Thank you for your message' in browser.page_source
+# Verify that the user is logged in and perform other actions on the dashboard page
+# ...
 
 # Close the browser
 browser.quit()
