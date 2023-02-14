@@ -12,11 +12,7 @@ class TestGoogleSearch():
         # Close the browser
         cls.driver.quit()
 
-    def test_google_search(self):
-        # Navigate to the Google homepage
-        self.driver.get("https://www.google.com")
+    browser.get('https://profile.w3schools.com/')
 
-        # Find the search input element and enter a search query
-        search_box = self.driver.find_element_by_name("q")
-        search_box.send_keys("python selenium")
-        search_box.submit()
+      # Close the browser
+browser.quit()
