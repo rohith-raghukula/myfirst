@@ -1,25 +1,29 @@
 from selenium import webdriver
+import time
 
-class TestYouTubeSearch():
-    @classmethod
-    def setup_class(cls):
-        # Create a new Chrome browser instance
-        cls.driver = webdriver.Chrome()
-        cls.driver.implicitly_wait(10)
+# Create a new instance of the Firefox driver
+driver = webdriver.Chrome()
 
-    @classmethod
-    def teardown_class(cls):
-        # Close the browser
-        cls.driver.quit()
+# Open the app.stezy.io website
+driver.get("https://app.stezy.io/")
 
-    def test_youtube_search(self):
-        # Navigate to the YouTube homepage
-        self.driver.get("https://www.youtube.com")
+# Find the email field element and enter the email address
+email_field = driver.find_element_by_name("usernamee")
+email_field.send_keys("example@email.com")
 
-        # Find the search input element and enter a search query
-        search_box = self.driver.find_element_by_name("search_query")
-        search_box.send_keys("python selenium tutorial")
-        search_box.submit()
+# Find the password field element and enter the password
+password_field = driver.find_element_by_name("password")
+password_field.send_keys("examplepassword")
 
-        # Assert that the search results page was loaded successfully
-        assert "python selenium tutorial - YouTube" in self.driver.title
+# Find the sign in button and click it
+signin_button = driver.find_element_by_css_selector(".sc-fznKkj.ljqwJN")
+signin_button.click()
+
+# Wait for the dashboard page to load
+time.sleep(5)
+
+# Verify that the user is logged in and the dashboard page is displayed
+assert "Dashboard" in driver.title
+
+# Close the browser
+driver.quit()
