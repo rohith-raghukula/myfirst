@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # Set Chrome options to run headless
 chrome_options = Options()
 chrome_options.add_argument('--headless')
-chrome_options.add_argument('--disable-gpu')
+# chrome_options.add_argument('--disable-gpu')
 
 # Initialize the Chrome browser with the headless options
 browser = webdriver.Chrome(options=chrome_options)
