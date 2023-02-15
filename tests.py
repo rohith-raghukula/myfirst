@@ -2,24 +2,15 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-class TestGoogleSearch():
-    @classmethod
-    def setup_class(cls):
-        # Create a new Chrome browser instance
-        cls.driver = webdriver.Chrome()
-        cls.driver.implicitly_wait(10)
 
-    @classmethod
-    def teardown_class(cls):
-        # Close the browser
-        cls.driver.quit()
+# Initialize the Chrome browser
+browser = webdriver.Chrome()
 
-    def test_google_search(self):
-        # Navigate to the Google homepage
-        browser.get('https://profile.w3schools.com/')
+# Navigate to the website login page
+browser.get('https://profile.w3schools.com/')
 
 # Find the email and password fields and enter the login credentials
-wait = WebDriverWait(10)
+wait = WebDriverWait(browser, 10)
 email_field = wait.until(EC.presence_of_element_located((By.ID, 'modalusername')))
 email_field.send_keys('rohithr9701@gmail.com')
 
