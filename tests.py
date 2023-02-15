@@ -7,10 +7,27 @@ from selenium.webdriver.support import expected_conditions as EC
 # Set Chrome options to run headless
 chrome_options = Options()
 chrome_options.add_argument('--headless')
-# chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
 
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
+
+# Specify the path to the ChromeDriver executable and the version number
+driver_path = '/path/to/chromedriver'
+driver_version = '92.0.4515.43'
+chrome_options.binary_location = '/path/to/google-chrome'
+
+# Create a new Service object with the specified options
+service = webdriver.chrome.service.Service(executable_path=driver_path, service_args=['--verbose', f'--version={driver_version}'])
+service.start()
+
+# Create a new ChromeDriver instance with the specified Service object
+browser = webdriver.Chrome(service=service, options=chrome_options)
 # Initialize the Chrome browser with the headless options
-browser = webdriver.Chrome(options=chrome_options)
+#browser = webdriver.Chrome(options=chrome_options)
 
 # Navigate to the YouTube website
 browser.get('https://www.youtube.com/')
