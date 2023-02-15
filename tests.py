@@ -1,6 +1,6 @@
 from selenium import webdriver
 
-class TestGoogleSearch():
+class TestYouTubeSearch():
     @classmethod
     def setup_class(cls):
         # Create a new Chrome browser instance
@@ -12,14 +12,14 @@ class TestGoogleSearch():
         # Close the browser
         cls.driver.quit()
 
-    def test_google_search(self):
-        # Navigate to the Google homepage
-        self.driver.get("https://www.google.com")
+    def test_youtube_search(self):
+        # Navigate to the YouTube homepage
+        self.driver.get("https://www.youtube.com")
 
         # Find the search input element and enter a search query
-        search_box = self.driver.find_element_by_name("q")
-        search_box.send_keys("python selenium")
+        search_box = self.driver.find_element_by_name("search_query")
+        search_box.send_keys("python selenium tutorial")
         search_box.submit()
 
         # Assert that the search results page was loaded successfully
-        assert "Python Selenium - Google Search" in self.driver.title
+        assert "python selenium tutorial - YouTube" in self.driver.title
