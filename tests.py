@@ -2,9 +2,16 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service
-service = Service('/path/to/chromedriver')
-browser = webdriver.Chrome(service=service)
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+# Set Chrome options to run in headless mode
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-gpu')
+
+# Initialize the Chrome browser with the headless options
+browser = webdriver.Chrome(options=chrome_options)
 
 # Initialize the Chrome browser
 browser = webdriver.Chrome()
