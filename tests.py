@@ -21,7 +21,7 @@ browser = webdriver.Chrome(service=service, options=chrome_options)
 browser.get('https://profile.w3schools.com/')
 
 # Find the email and password fields and enter the login credentials
-wait = WebDriverWait(browser, 10)
+wait = WebDriverWait(browser, 19)
 email_field = wait.until(EC.presence_of_element_located((By.NAME, 'username')))
 email_field.send_keys('rohithr9701@gmail.com')
 
