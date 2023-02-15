@@ -1,41 +1,31 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 
-# Set Chrome options to run in headless mode
+# Set Chrome options to run headless
 chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--disable-gpu')
 
-# Create a Service object with the path to the Chrome driver executable
-service = Service('/path/to/chromedriver')
+# Initialize the Chrome browser with the headless options
+browser = webdriver.Chrome(options=chrome_options)
 
-# Initialize the Chrome browser with the headless options and the Service object
-browser = webdriver.Chrome(service=service, options=chrome_options)
+# Navigate to the YouTube website
+browser.get('https://www.youtube.com/')
 
-# Navigate to the website login page
-browser.get('https://profile.w3schools.com/')
+# Find the search bar element and enter a search query
+search_bar = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.NAME, 'search_query')))
+search_bar.send_keys('Python programming')
+search_bar.submit()
 
-# Find the email and password fields and enter the login credentials
-wait = WebDriverWait(browser, 19)
-email_field = wait.until(EC.presence_of_element_located((By.ID, 'modalusername')))
-email_field.send_keys('rohithr9701@gmail.com')
+# Wait for the search results page to load
+WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, 'search')))
 
-password_field = wait.until(EC.presence_of_element_located((By.ID, 'current-password')))
-password_field.send_keys('Rohith@123')
-
-# Submit the login form
-password_field.submit()
-
-# Wait for the dashboard page to load
-wait.until(EC.url_contains('dashboard'))
-
-# Verify that the user is logged in and perform other actions on the dashboard page
+# Verify that the search results contain relevant videos
 # ...
 
 # Close the browser
+print("end of the code ..")
 browser.quit()
