@@ -1,15 +1,13 @@
-name: Selenium Test
+name: Run Selenium script
 
-on:
-  push:
-    branches: [ main ]
+on: [push]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install Chromium and ChromeDriver
+    - name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y chromium-browser
@@ -18,10 +16,6 @@ jobs:
         unzip chromedriver_linux64.zip
         chmod +x chromedriver
         sudo mv chromedriver /usr/local/bin/
-    - name: Python setup and run script
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-      run: |
         pip install -r requirements.txt
-        python tests.py
+    - name: Run Selenium script
+      run: python tests.py
