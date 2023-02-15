@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
 # Set Chrome options to run in headless mode
@@ -10,8 +10,12 @@ chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--disable-gpu')
 
-# Initialize the Chrome browser with the headless options and the path to the Chrome driver
-browser = webdriver.Chrome('/path/to/chromedriver', options=chrome_options)
+# Create a Service object with the path to the Chrome driver executable
+service = Service('/path/to/chromedriver')
+
+# Initialize the Chrome browser with the headless options and the Service object
+browser = webdriver.Chrome(service=service, options=chrome_options)
+
 
 # Navigate to the website login page
 browser.get('https://profile.w3schools.com/')
