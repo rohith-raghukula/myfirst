@@ -10,11 +10,8 @@ chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--disable-gpu')
 
-# Initialize the Chrome browser with the headless options
-browser = webdriver.Chrome(options=chrome_options)
-
-# Initialize the Chrome browser
-browser = webdriver.Chrome()
+# Initialize the Chrome browser with the headless options and the path to the Chrome driver
+browser = webdriver.Chrome('/path/to/chromedriver', options=chrome_options)
 
 # Navigate to the website login page
 browser.get('https://profile.w3schools.com/')
