@@ -13,7 +13,7 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 driver_path = '/path/to/chromedriver'  # Update this with the path to your chromedriver executable
 # Specify the version of ChromeDriver to use
-driver_version = '93.0.4577.63'
+driver_version = '92.0.4515.43'
 
 # Create a new ChromeOptions object
 chrome_options = webdriver.ChromeOptions()
