@@ -36,3 +36,6 @@ class TestStezyLogin(unittest.TestCase):
 
         # Check if login was successful
         self.assertIn("dashboard", self.driver.current_url, "Login failed")
+        
+        if __name__ == '__main__':
+    unittest.main()
