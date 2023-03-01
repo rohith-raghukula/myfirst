@@ -1,38 +1,32 @@
-import unittest
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-import time
+name: Python Selenium Test
 
-class TestStezyLogin(unittest.TestCase):
+on:
+  push:
+    branches:
+      - main
 
-    @classmethod
-    def setUpClass(cls):
-        # Create a new Chrome browser instance
-        cls.driver = webdriver.Chrome()
-        cls.driver.implicitly_wait(10)
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-    @classmethod
-    def tearDownClass(cls):
-        # Close the browser
-        cls.driver.quit()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    def test_stezy_login(self):
-        # Navigate to the app.stezy.io homepage
-        self.driver.get("https://app.stezy.io")
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
 
-        # Find the email and password input fields and enter login credentials
-        email_input = self.driver.find_element(By.NAME, "username")
-        email_input.send_keys("rohit@stezy.io")
+      - name: Install dependencies
+        run: |
+           pip install driver 
+           pip install --upgrade pip
+           pip install -r requirements.txt
+      - name: Run tests
+        run: |
+          python -m unittest discover -v -s . -p "test_*.py"
+      - name: Check for test failures
+        if: ${{ job.status == 'success' && steps.test.outcome == 'failure' }}
+        run: exit 1
 
-        password_input = self.driver.find_element(By.NAME, "Password")
-        password_input.send_keys("Stezy@123")
-
-        # Find the login button and click it
-        login_button = self.driver.find_element(By.NAME, "LogIn")
-        login_button.click()
-
-        print("hi")
-        time.sleep(10)
-
-        # Check if login was successful
-        self.assertIn("dashboard", self.driver.current_url, "Login failed")
