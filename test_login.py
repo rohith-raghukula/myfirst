@@ -5,12 +5,12 @@ import time
 
 class TestStezyLogin(unittest.TestCase):
 
-        def setUpClass(cls):
+    def setUpClass(cls):
         # Configure Chrome options
         options = webdriver.ChromeOptions()
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
-        
+
     @classmethod
     def setUpClass(cls):
         # Create a new Chrome browser instance
@@ -42,5 +42,6 @@ class TestStezyLogin(unittest.TestCase):
 
         # Check if login was successful
         self.assertIn("dashboard", self.driver.current_url, "Login failed")
-        
-  
+
+if __name__ == '__main__':
+    unittest.main()
